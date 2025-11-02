@@ -1,5 +1,6 @@
 
 let begin_screen,gender_screen,intro_screen;
+// debug
 let testcount = 0;
 let cprD;
 let cprR;
