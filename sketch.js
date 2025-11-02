@@ -69,37 +69,15 @@ function preload(){
   cprD_yes = loadImage("Dnot safe.png");
   dcantsafe = loadImage("Dcan't safe (3).png");
   check_response = loadImage("response check.png");
-//call 108 or shout
-  call = loadImage("call.png");
-  call1 = loadImage("call 1.png");
-  cprS0 = loadImage("call10 (1).png");
-  cprS8 = loadImage("call 108 (1).png");
-  cprCalling = loadImage("calling 108.png");
-  // AED
-  cprA = loadImage("cprA (1).png");
 // check for breathing
   cprB = loadImage("b.png")
-  normal_breath_aud = loadSound("breathing-6811.mp3");
-  gasp_aud = loadSound("gasping.m4a");
   breath_check = loadImage("breathing check.png");
   check_b_type = loadImage("btypecheck.png");
   normal_breath = loadImage("normalbreathing.png");
+  //call 108 or shout
   // cpr compressions instructions
-  cprC1 = loadImage("cprC1.gif");
-  cprC2 = loadImage("cprC2.png");
-  cprC3 = loadImage("cprC3.png");
-  cprC4 = loadImage("cprC4.gif");
-  cprBegin = loadImage("cprBegin.png");
   // play screen
-  playimg = loadImage("eyes+ (2).png");
-  heartimg = loadImage("heart.png");
-  meterimg = loadImage("bpm meter86.png");
-  arrowimg = loadImage("arrow2.png");
   // wincreens
-  win = loadImage("revived.gif");
-  aed = loadImage("AED_FOUND.gif");
-  amb = loadImage("amb.gif");
-  late = loadImage("delayed.png");
   // promise screen
   promiseT = loadImage("giffycanvas - 2025-10-29T083935.786.gif");
   promiseTM = loadImage("giffycanvas - 2025-10-29T161641.860.gif");
@@ -120,8 +98,8 @@ function preload(){
 function setup(){
   createCanvas(windowWidth,windowHeight);
   breath_no = floor(random(11));
-  maxTotalCompressions = floor(random(30, 50));
-  task_time = 600 * maxTotalCompressions+3000;
+  //maxTotalCompressions = floor(random(30, 50));
+  //task_time = 600 * maxTotalCompressions+3000;
   console.log(breath_no)
   imageMode(CENTER);
   // begin button
@@ -252,74 +230,7 @@ function draw(){
     }else if(currentState === "check_b_type"){
     background("#F35F3C");
     image(check_b_type,width/2,height/2);
-    }else if(currentState === "call"){
-    background("#F35F3C");
-    image(call,width/2,height/2);
-    }else if(currentState === "call1"){
-    background("#F35F3C");
-    image(call1,width/2,height/2);
-    }else if(currentState === "cprS0"){
-    background("#F35F3C");
-    image(cprS0,width/2,height/2);
-    }else if(currentState === "cprS8"){
-    background("#F35F3C");
-    image(cprS8,width/2,height/2);
-    }else if(currentState === "cprCalling"){
-    background("#F35F3C");
-    image(cprCalling,width/2,height/2);
-      if(millis()- call_time > 500){
-       currentState ="cprA";
-       console.log(currentState);
-      }
-    }else if(currentState === "cprA"){
-    background("#F35F3C");
-    image(cprA,width/2,height/2);
-    }else if(currentState === "cprC1"){
-      cprtpass = millis()-cprtime;
-    if(cprtpass > 6000){
-      currentState = "cprC2";
-} 
-    background("#F35F3C");
-    image(cprC1,width/2,height/2);
-    }else if(currentState === "cprC2"){
-      cprtpass = millis()-cprtime;
-    if(cprtpass > 14000){
-      currentState = "cprC3";
-} 
-    background("#F35F3C");
-    image(cprC2,width/2,height/2);
-    }else if(currentState === "cprC3"){
-      cprtpass = millis()-cprtime;
-    if(cprtpass > 20000){
-      currentState = "cprC4";
-} 
-    background("#F35F3C");
-    image(cprC3,width/2,height/2);
-    }else if(currentState === "cprC4"){
-    background("#F35F3C");
-    image(cprC4,width/2,height/2);
-       cprtpass = millis()-cprtime;
-    if(cprtpass > 30000){
-      currentState = "cprBegin";
-} 
-    }else if(currentState === "cprBegin"){
-    background("#F35F3C");
-    image(cprBegin,width/2,height/2);
-    }else if(currentState === "play"){
-    playScreen();
-    }else if(currentState === "win"){
-    background("#FFC5B7");
-    image(win,width/2,height/2);
-    }else if(currentState === "aed"){
-    background("#FFC5B7");
-    image(aed,width/2,height/2);
-    }else if(currentState === "amb"){
-    background("#FFC5B7");
-    image(amb,width/2,height/2);
-    }else if(currentState === "late"){
-    background("#FFC5B7");
-    image(late,width/2,height/2);
-    }else if(currentState === "promiseT"){
+    } else if(currentState === "promiseT"){
     background("#F35F3C");
     image(promiseT,width/2,height/2);
       promise_time = millis()-promise_start;
@@ -504,15 +415,9 @@ function mousePressed(){
       mouseY > noy &&
       mouseY < noy + noh
     ) {
-      //normal_breath_aud.play();
-       gasp_aud.play();
-       
-      //currentState = "cprB";
-      //breathe_time = millis();
       console.log(currentState);
      }
-
-      } else if (currentState == "breath_Check"){
+ } else if (currentState == "breath_Check"){
     if (
       mouseX > yesx &&
       mouseX < yesx + yesw &&
@@ -527,7 +432,7 @@ function mousePressed(){
       mouseY > noy &&
       mouseY < noy + noh
     ) {
-      currentState = "call";
+      currentState = "a";
       console.log(currentState);
       }
   }else if(currentState == "check_b_type"){
@@ -545,7 +450,7 @@ function mousePressed(){
       mouseY > abnormaly &&
       mouseY < abnormaly + abnormalh
     ) {
-      currentState = "call";
+      currentState = "a";
       console.log(currentState);
       }
   }else if(currentState == "b_normal"){
@@ -567,194 +472,6 @@ function mousePressed(){
       mouseY < promisey + promiseh
     ){
       currentState = "promise_seal";
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "call"){
-    if (
-      mouseX > nextx &&
-      mouseX < nextx + nextw &&
-      mouseY > nexty &&
-      mouseY < nexty + nexth
-    ) {
-      currentState = "call1";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprS"){
-    if (
-      mouseX > call1x &&
-      mouseX < call1x + call1w &&
-      mouseY > call1y &&
-      mouseY < call1y + call1h
-    ) {
-      currentState = "cprS1";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprS1"){
-    if (
-      mouseX > call0x &&
-      mouseX < call0x + call0w &&
-      mouseY > call0y &&
-      mouseY < call0y + call0h
-    ) {
-      currentState = "cprS0";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprS0"){
-    if (
-      mouseX > call8x &&
-      mouseX < call8x + call8w &&
-      mouseY > call8y &&
-      mouseY < call8y + call8h
-    ) {
-      currentState = "cprS8";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprS8"){
-    if (
-      mouseX > callx &&
-      mouseX < callx + callw &&
-      mouseY > cally &&
-      mouseY < cally + callh
-    ) {
-      currentState = "cprCalling";
-      call_time = millis();
-      console.log(currentState);
-      }
-  }else if(currentState == "cprC1"){
-    if (
-      mouseX > nextx &&
-      mouseX < nextx + nextw &&
-      mouseY > nexty &&
-      mouseY < nexty + nexth
-    ) {
-      currentState = "cprC2";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprC2"){
-    if (
-      mouseX > nextx &&
-      mouseX < nextx + nextw &&
-      mouseY > nexty &&
-      mouseY < nexty + nexth
-    ) {
-      currentState = "cprC3";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprC3"){
-    if (
-      mouseX > nextx &&
-      mouseX < nextx + nextw &&
-      mouseY > nexty &&
-      mouseY < nexty + nexth
-    ) {
-      currentState = "cprC4";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprC4"){
-    if (
-      mouseX > nextx &&
-      mouseX < nextx + nextw &&
-      mouseY > nexty &&
-      mouseY < nexty + nexth
-    ) {
-      currentState = "cprBegin";
-      console.log(currentState);
-      }
-  }else if(currentState == "cprBegin"){
-   if (
-      mouseX > cpressx &&
-      mouseX < cpressx + cpressw &&
-      mouseY > cpressy &&
-      mouseY < cpressy + cpressh
-    ){
-      currentState = "play";
-     play_start_time = millis();
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "play"){
-    compression_count += 1;
-    console.log(compression_count);
-    //press_music.play();
-    now = millis();
-    if (lastTouchTime !== 0) {
-      interval = now - lastTouchTime;
-      let calculatedBPM = 60000 / interval;
-      bpm = calculatedBPM;
-      console.log(bpm);
-  }
-    lastTouchTime = now;
-  
-  handle_live();
-  }else if(currentState == "win"){
-   if (
-      mouseX > lastx &&
-      mouseX < lastx + lastw &&
-      mouseY > lasty &&
-      mouseY < lasty + lasth
-    ){
-      currentState = "promiseT";
-     promise_start = millis();
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "aed"){
-   if (
-      mouseX > lastx &&
-      mouseX < lastx + lastw &&
-      mouseY > lasty &&
-      mouseY < lasty + lasth
-    ){
-      currentState = "promiseT";
-     promise_start = millis();
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "amb"){
-   if (
-      mouseX > lastx &&
-      mouseX < lastx + lastw &&
-      mouseY > lasty &&
-      mouseY < lasty + lasth
-    ){
-      currentState = "promiseT";
-     promise_start = millis();
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "Promise_press"){
-   if (
-      mouseX > promisex &&
-      mouseX < promisex + promisew &&
-      mouseY > promisey &&
-      mouseY < promisey + promiseh
-    ){
-      currentState = "promise_seal";
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "promise_seal"){
-   if (
-      mouseX > replayx &&
-      mouseX < replayx + replayw &&
-      mouseY > replayy &&
-      mouseY < replayy + replayh
-    ){
-      currentState = "begin";
-     reset();
-      console.log(currentState);
-    }
-     
-  }else if(currentState == "late"){
-   if (
-      mouseX > lastx &&
-      mouseX < lastx + lastw &&
-      mouseY > lasty &&
-      mouseY < lasty + lasth
-    ){
-      currentState = "promiseT";
-     promise_start = millis();
       console.log(currentState);
     }
      
